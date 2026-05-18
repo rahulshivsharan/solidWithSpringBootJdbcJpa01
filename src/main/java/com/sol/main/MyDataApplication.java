@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.sol.service.UserService;
 import com.sol.vo.UserVO;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.sol"})
 public class MyDataApplication implements CommandLineRunner{
 	
 	
@@ -20,6 +22,7 @@ public class MyDataApplication implements CommandLineRunner{
 	}
 
 	public void loadUsers() {
+		System.out.println("---- Fetcing uder data -----");
 		List<UserVO> list = this.service.getUsers();
 		list.stream().forEach(System.out::println);
 	}
