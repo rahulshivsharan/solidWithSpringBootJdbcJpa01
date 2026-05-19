@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.sol.service.UserService;
@@ -12,6 +13,7 @@ import com.sol.vo.UserVO;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.sol"})
+@EntityScan(basePackages = {"com.sol.entity"})
 public class MyDataApplication implements CommandLineRunner{
 	
 	

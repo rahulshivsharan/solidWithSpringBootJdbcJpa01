@@ -1,10 +1,8 @@
 package com.sol.repo;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +10,7 @@ import com.sol.exception.UserRepositoryException;
 import com.sol.mapper.UserRowMapper;
 import com.sol.vo.UserVO;
 
-@Repository
-@Qualifier("jdbcRepo")
+@Repository("jdbcRepo")
 public class JDBCUserRepository implements UserRepository{
 	
 	private final JdbcTemplate jdbcTemplate;
@@ -30,8 +27,7 @@ public class JDBCUserRepository implements UserRepository{
 	}
 
 	@Override
-	public List<UserVO> getUsers() {
-		Connection con = null;
+	public List<UserVO> getUsers() {		
 		try {
 			List<UserVO> userList = new ArrayList<UserVO>();
 			String sql = "select id, username, password from userstbl";

@@ -15,9 +15,13 @@ public class UserService {
 	private final UserRepository repo;
 	
 	
-	public UserService(@Qualifier("jdbcRepo") UserRepository repo) {
+	public UserService(@Qualifier("jpaRepo") UserRepository repo) {
 		this.repo = repo;
 	}
+	
+//	public UserService(@Qualifier("jdbcRepo") UserRepository repo) {
+//		this.repo = repo;
+//	}
 	
 	@Transactional
 	public List<UserVO> getUsers(){
