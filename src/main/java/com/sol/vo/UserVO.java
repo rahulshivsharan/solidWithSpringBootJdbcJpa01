@@ -8,9 +8,7 @@ public class UserVO {
 	private String name;
 	private String password;
 
-	public UserVO() {
-	}
-	
+		
 	public UserVO(UserEntity entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();

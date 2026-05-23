@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 import com.sol.entity.UserEntity;
+import com.sol.exception.UserRepositoryException;
 import com.sol.vo.UserVO;
 
 import jakarta.persistence.EntityManager;
@@ -25,11 +26,16 @@ public class JPAUserRepository implements UserRepository{
 	}
 
 	@Override
-	public List<UserVO> getUsers() {	
-		TypedQuery<UserEntity> query = em.createQuery("select u from UserEntity u", UserEntity.class); 
-		List<UserEntity> userList = query.getResultList();
+	public List<UserVO> getUsers() {
+		try {
+			TypedQuery<UserEntity> query = em.createQuery("select u from UserEntity u", UserEntity.class); 
+			List<UserEntity> userList = query.getResultList();
+			
+			List<UserVO> list  = userList.stream().map((entity) -> new UserVO(entity)).collect(Collectors.toList());			
+			return list;
+		}catch(Exception e) {
+			throw new UserRepositoryException("Failed to fetch users", e);
+		}
 		
-		List<UserVO> list  = userList.stream().map((entity) -> new UserVO(entity)).collect(Collectors.toList());			
-		return list;
 	}
 }
